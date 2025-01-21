@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Container, Row, Spinner, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import ProfileTopBar from "../components/ProfileTopbar";
+import ProfileTopBar from "../components/ProfileTopBar";
 import { Button, Form } from "react-bootstrap";
 import { storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";

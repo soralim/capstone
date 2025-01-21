@@ -2,7 +2,7 @@ import { Container, Row } from "react-bootstrap";
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "use-local-storage";
-import ProfileTopBar from "../components/ProfileTopbar";
+import ProfileTopBar from "../components/ProfileTopBar";
 import ProfileMidBody from "../components/ProfileMidBody";
 import { jwtDecode } from "jwt-decode";
 

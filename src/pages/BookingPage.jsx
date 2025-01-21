@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Button, Form, Container, Row, Col, Alert } from 'react-bootstrap';
 import { jwtDecode } from 'jwt-decode';
-import ProfileTopBar from '../components/ProfileTopbar';
+import ProfileTopBar from '../components/ProfileTopBar';
 import { useNavigate } from 'react-router-dom';
 import { gapi } from 'gapi-script'; 
 import useLocalStorage from 'use-local-storage';
