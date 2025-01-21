@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useLocalStorage from "use-local-storage";
 import { useNavigate } from "react-router-dom";
+import image from '/hotel.png'
 
 export default function AuthPage() {
-    const loginImage = "src/assets/hotel.png";
+   // const loginImage = "src/assets/hotel.png";
     const url = "https://71614d2a-dc59-4978-860d-9efccce24f05-00-2enh7o89sfh7s.pike.replit.dev";
     const [modalShow, setModalShow] = useState(null);
     const handleShowSignUp = () => setModalShow("Signup");
@@ -50,7 +51,7 @@ export default function AuthPage() {
     return (
         <Row className="vh-100">
             <Col sm={12} className="p-0">
-                <Image src={loginImage} fluid style={{ width: "100%", height: "50vh", objectFit: "cover" }} />
+                <Image src={image} fluid style={{ width: "100%", height: "50vh", objectFit: "cover" }} />
             </Col>
             <Col sm={12} className="d-flex align-items-center justify-content-center vh-100" style={{ marginTop: "-50vh" }}>
                 <Container className="d-flex flex-column align-items-center justify-content-center bg-light p-5 shadow rounded" style={{ maxWidth: "500px" }}>
