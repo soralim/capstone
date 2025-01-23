@@ -49,6 +49,7 @@ export default function ViewBooking() {
   }, [authToken, navigate, fetchUserProfile]);
 
   const handleLogout = () => {
+    localStorage.removeItem("authToken");
     setAuthToken("");
     navigate("/login");
   };

@@ -96,6 +96,7 @@ const BookingPage = () => {
     };
 
     const handleLogout = () => {
+        localStorage.removeItem("authToken");
         setAuthToken("");
         navigate('/login');
     };

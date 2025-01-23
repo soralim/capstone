@@ -50,6 +50,7 @@ export default function DeluxeRoomPage() {
   }, [authToken, navigate, fetchUserProfile]);
 
   const handleLogout = () => {
+    localStorage.removeItem("authToken");
     setAuthToken("");
     navigate("/login");
   };
