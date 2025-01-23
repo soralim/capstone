@@ -18,7 +18,7 @@ export default function AuthPage() {
 
     useEffect(() => {
         if (authToken) {
-            navigate("/view");
+            navigate("/main");
         }
     }, [authToken, navigate]);
 

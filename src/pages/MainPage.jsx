@@ -2,6 +2,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react";
 import useLocalStorage from "use-local-storage";
+import { jwtDecode } from "jwt-decode";
 import ProfileTopBar from "../components/ProfileTopBar"; // Import the top bar
 
 import image from '/hotel.png'
@@ -15,52 +16,52 @@ export default function StardewHotel() {
   const navigate = useNavigate();
 
   const fetchUserProfile = useCallback(async () => {
-    if (authToken) {
-      try {
-        const response = await fetch(
-          `https://71614d2a-dc59-4978-860d-9efccce24f05-00-2enh7o89sfh7s.pike.replit.dev/users`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`,
-            },
+      if (authToken) {
+        const decodedToken = jwtDecode(authToken);
+        const userId = decodedToken.id;
+  
+        try {
+          const response = await fetch(
+            `https://71614d2a-dc59-4978-860d-9efccce24f05-00-2enh7o89sfh7s.pike.replit.dev/users?user_id=${userId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+              },
+            }
+          );
+  
+          if (response.ok) {
+            const data = await response.json();
+            setProfilePicURL(data[0]?.profilePicURL || "");
+          } else {
+            console.error("Failed to fetch user profile:", response.statusText);
           }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setProfilePicURL(data[0]?.profilePicURL || "");
-        } else {
-          console.error("Failed to fetch user profile:", response.statusText);
+        } catch (error) {
+          console.error("Error fetching profile:", error);
         }
-      } catch (error) {
-        console.error("Error fetching profile:", error);
       }
-    }
-  }, [authToken]);
-
-  useEffect(() => {
-    if (!authToken) {
+    }, [authToken]);
+  
+    useEffect(() => {
+      if (!authToken) {
+        navigate("/login");
+      } else {
+        fetchUserProfile();
+      }
+    }, [authToken, navigate, fetchUserProfile]);
+  
+    const handleLogout = () => {
+      setAuthToken("");
       navigate("/login");
-    } else {
-      fetchUserProfile();
-    }
-  }, [authToken, navigate, fetchUserProfile]);
-
-  const handleLogout = () => {
-    setAuthToken("");
-    navigate("/login");
-  };
+    };
 
   return (
     <Container fluid>
       {/* Top Bar Section */}
       <Row>
-        <ProfileTopBar
-          handleLogout={handleLogout}
-          profilePicURL={profilePicURL}
-        />
+        <ProfileTopBar handleLogout={handleLogout} profilePicURL={profilePicURL} />
       </Row>
 
       {/* Banner Section */}
