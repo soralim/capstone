@@ -8,6 +8,7 @@ import image from '/hotel.png';
 export default function AuthPage() {
     const url = "https://71614d2a-dc59-4978-860d-9efccce24f05-00-2enh7o89sfh7s.pike.replit.dev";
     const [modalShow, setModalShow] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(""); // Success message state
     const handleShowSignUp = () => setModalShow("Signup");
     const handleShowLogin = () => setModalShow("Login");
     const [username, setUsername] = useState("");
@@ -39,8 +40,11 @@ export default function AuthPage() {
         try {
             const res = await axios.post(`${url}/signup`, { username, password });
             console.log("Signup success:", res.data);
+            setSuccessMessage("Account successfully created! Please log in to continue.");
+            setModalShow(null); // Close the sign-up modal
         } catch (error) {
             console.error("Signup error:", error.response?.data || error.message);
+            setError("Something went wrong. Please try again.");
         }
     };
 
@@ -100,12 +104,16 @@ export default function AuthPage() {
                         </Button>
                     </Col>
                 </Container>
+
+                {/* Signup and Login Modals */}
                 <Modal show={modalShow !== null} onHide={handleClose} animation={false} centered>
                     <Modal.Body>
                         <h2 className="mb-4" style={{ fontWeight: "bold" }}>
                             {modalShow === "Signup" ? "Create your account" : "Log in to your account"}
                         </h2>
                         {error && <p style={{ color: "red" }}>{error}</p>}
+                        {successMessage && <p style={{ color: "green" }}>{successMessage}</p>} {/* Show success message */}
+
                         <Form
                             className="d-grid gap-2 px-5"
                             onSubmit={modalShow === "Signup" ? handleSignUp : handleLogin}
