@@ -218,7 +218,7 @@ const BookingPage = () => {
 
                         <Form onSubmit={handleSubmit}>
                             <Form.Group controlId="formTitle">
-                                <Form.Label>Title</Form.Label>
+                                <Form.Label>Name</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Enter user name"
