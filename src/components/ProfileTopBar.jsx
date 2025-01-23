@@ -23,74 +23,86 @@ export default function ProfileTopBar({ handleLogout, profilePicURL }) {
         zIndex: 1000,
         padding: "0.5rem",
         width: "100%",
+        flexWrap: "wrap", // For responsive design
       }}
     >
       <div className="d-flex">
+        {/* Home Button */}
+        <IconButton
+          className="d-flex align-items-center"
+          text="Home"
+          onClick={() => navigate("/main")}
+          aria-label="Navigate to home page"
+        >
+          <FaHome style={{ ...iconStyle, fontSize: "16px" }} /> {/* Smaller icon */}
+        </IconButton>
+
+        {/* Reservation Button */}
         <IconButton
           className="d-flex align-items-center"
           text="Reservation"
           onClick={() => navigate("/view")}
           aria-label="Navigate to reservation page"
         >
-          <FaHome style={iconStyle} />
+          <FaBookmark style={{ ...iconStyle, fontSize: "16px" }} /> {/* Smaller icon */}
         </IconButton>
 
+        {/* Booking Button */}
         <IconButton
           className="d-flex align-items-center"
           text="Booking"
           onClick={() => navigate("/booking")}
           aria-label="Navigate to booking page"
         >
-          <FaBookmark style={iconStyle} />
+          <FaBookmark style={{ ...iconStyle, fontSize: "16px" }} /> {/* Smaller icon */}
         </IconButton>
 
+        {/* Profile Button */}
         <IconButton
-          className="d-flex align-items-center"
-          text="Profile"
-          onClick={() => navigate("/profile")}
-          aria-label="Navigate to profile page"
-        >
-          {profilePicURL ? (
-            <img
-              src={profilePicURL}
-              alt="Profile"
-              style={{
-                width: "30px",
-                height: "30px",
-                borderRadius: "50%",
-                marginRight: "0.5rem",
-                objectFit: "cover",
-              }}
-              onError={(e) => {
-                console.error("Error loading profile picture:", e);
-                e.target.src = "/default-profile-image.png";
-              }}
-            />
-          ) : (
-            <FaUser style={{ marginRight: "0.5rem" }} />
-          )}
-        </IconButton>
+  className="d-flex align-items-center"
+  text="Profile"
+  onClick={() => navigate("/profile")}
+  aria-label="Navigate to profile page"
+>
+  {profilePicURL ? (
+    <img
+      src={profilePicURL}
+      alt="Profile"
+      style={{
+        width: "25px",
+        height: "25px",
+        borderRadius: "50%",
+        marginRight: "0.5rem",
+        objectFit: "cover",
+      }}
+    />
+  ) : (
+    <FaUser style={{ marginRight: "0.5rem", fontSize: "16px" }} />
+  )}
+</IconButton>
 
+        {/* Logout Button */}
         <IconButton
           className="d-flex align-items-center"
           text="Logout"
           onClick={confirmLogout}
           aria-label="Log out"
         >
-          <FaDoorClosed style={iconStyle} />
+          <FaDoorClosed style={{ ...iconStyle, fontSize: "16px" }} /> {/* Smaller icon */}
         </IconButton>
       </div>
 
+      {/* Profile Image */}
       <div
         style={{
           position: "absolute",
           top: "10px",
           right: "10px",
-          width: "50px",
-          height: "50px",
+          width: "30px", // Adjusted size for profile image
+          height: "30px", // Adjusted size for profile image
           borderRadius: "50%",
           overflow: "hidden",
-          backgroundColor: "white", 
+          backgroundColor: "white",
         }}
       >
         {profilePicURL ? (
@@ -104,7 +116,7 @@ export default function ProfileTopBar({ handleLogout, profilePicURL }) {
             }}
             onError={(e) => {
               console.error("Error loading profile picture:", e);
-              e.target.src = "/default-profile-image.png"; 
+              e.target.src = "/default-profile-image.png";
             }}
           />
         ) : (

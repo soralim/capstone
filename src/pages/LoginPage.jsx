@@ -3,10 +3,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useLocalStorage from "use-local-storage";
 import { useNavigate } from "react-router-dom";
-import image from '/hotel.png'
+import image from '/hotel.png';
 
 export default function AuthPage() {
-   // const loginImage = "src/assets/hotel.png";
     const url = "https://71614d2a-dc59-4978-860d-9efccce24f05-00-2enh7o89sfh7s.pike.replit.dev";
     const [modalShow, setModalShow] = useState(null);
     const handleShowSignUp = () => setModalShow("Signup");
@@ -14,7 +13,7 @@ export default function AuthPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [authToken, setAuthToken] = useLocalStorage("authToken", "");
-
+    const [error, setError] = useState(""); // For displaying error messages
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,6 +24,18 @@ export default function AuthPage() {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
+
+        // Validation for username (email) and password
+        if (!validateEmail(username)) {
+            setError("Please enter a valid email address.");
+            return;
+        }
+
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters long.");
+            return;
+        }
+
         try {
             const res = await axios.post(`${url}/signup`, { username, password });
             console.log("Signup success:", res.data);
@@ -35,6 +46,17 @@ export default function AuthPage() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
+        if (!validateEmail(username)) {
+            setError("Please enter a valid email address.");
+            return;
+        }
+
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters long.");
+            return;
+        }
+
         try {
             const res = await axios.post(`${url}/login`, { username, password });
             if (res.data && res.data.auth === true && res.data.token) {
@@ -48,6 +70,11 @@ export default function AuthPage() {
 
     const handleClose = () => setModalShow(null);
 
+    const validateEmail = (email) => {
+        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return regex.test(email);
+    };
+
     return (
         <Row className="vh-100">
             <Col sm={12} className="p-0">
@@ -58,7 +85,7 @@ export default function AuthPage() {
                     <p className="mt-5" style={{ fontSize: 64, color: "#000", textShadow: "2px 2px 8px rgba(255, 255, 255, 0.7)" }}>Hotel</p>
 
                     <Col sm={12} className="d-grid gap-2">
-                    <h5>login   </h5>
+                        <h5>login</h5>
                         <Button className="rounded-pill" onClick={handleShowSignUp}>Create an account</Button>
 
                         <p className="mt-5" style={{ fontWeight: "bold" }}>
@@ -78,6 +105,7 @@ export default function AuthPage() {
                         <h2 className="mb-4" style={{ fontWeight: "bold" }}>
                             {modalShow === "Signup" ? "Create your account" : "Log in to your account"}
                         </h2>
+                        {error && <p style={{ color: "red" }}>{error}</p>}
                         <Form
                             className="d-grid gap-2 px-5"
                             onSubmit={modalShow === "Signup" ? handleSignUp : handleLogin}
@@ -86,7 +114,7 @@ export default function AuthPage() {
                                 <Form.Control
                                     onChange={(e) => setUsername(e.target.value)}
                                     type="text"
-                                    placeholder="Enter username"
+                                    placeholder="Enter username (email)"
                                 />
                             </Form.Group>
 
