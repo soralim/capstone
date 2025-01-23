@@ -82,14 +82,14 @@ export default function AuthPage() {
             </Col>
             <Col sm={12} className="d-flex align-items-center justify-content-center vh-100" style={{ marginTop: "-50vh" }}>
                 <Container className="d-flex flex-column align-items-center justify-content-center bg-light p-5 shadow rounded" style={{ maxWidth: "500px" }}>
-                    <p className="mt-5" style={{ fontSize: 64, color: "#000", textShadow: "2px 2px 8px rgba(255, 255, 255, 0.7)" }}>Hotel</p>
+                    <p className="mt-5" style={{ fontSize: 64, color: "#000", textShadow: "2px 2px 8px rgba(255, 255, 255, 0.7)" }}>Stardew Hotel</p>
 
                     <Col sm={12} className="d-grid gap-2">
-                        <h5>login</h5>
+                        <h5>Signup</h5>
                         <Button className="rounded-pill" onClick={handleShowSignUp}>Create an account</Button>
 
                         <p className="mt-5" style={{ fontWeight: "bold" }}>
-                            Already have an account?
+                            Login
                         </p>
                         <Button
                             className="rounded-pill"
