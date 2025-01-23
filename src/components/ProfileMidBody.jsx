@@ -131,7 +131,7 @@ export default function ProfileMidBody() {
                     <Table striped bordered hover className="mt-3">
                         <thead className="bg-primary text-white">
                             <tr>
-                                <th>Title</th>
+                                <th>Name</th>
                                 <th>Room Type</th>
                                 <th>Date</th>
                                 <th>Time</th>

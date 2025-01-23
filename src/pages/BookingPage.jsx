@@ -221,7 +221,7 @@ const BookingPage = () => {
                                 <Form.Label>Title</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    placeholder="Enter booking title"
+                                    placeholder="Enter user name"
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
                                     required
@@ -237,10 +237,9 @@ const BookingPage = () => {
                                     required
                                 >
                                     <option value="">Select room type</option>
-                                    <option value="Single Room">Single Room</option>
-                                    <option value="Double Room">Double Room</option>
+                                    <option value="Standard Room">Standard Room</option>
+                                    <option value="Deluxe Room">Deluxe Room</option>
                                     <option value="Suite">Suite</option>
-                                    <option value="Deluxe Suite">Deluxe Suite</option>
                                 </Form.Control>
                             </Form.Group>
 
